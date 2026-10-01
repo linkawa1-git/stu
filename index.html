@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Three Essential MEP Systems</title>
+</head>
+
+<body>
+
+    <header>
+        <h1>Three Essential MEP Systems</h1>
+    </header>
+
+    <main>
+        <section>
+            <h2>Introduction</h2>
+
+            <p>
+                MEP engineering includes mechanical, electrical,
+                and plumbing systems in buildings.
+            </p>
+
+            <h2>Main Systems</h2>
+
+            <ul>
+                <li>Mechanical ventilation</li>
+                <li>Electrical power distribution</li>
+                <li>Plumbing and drainage</li>
+            </ul>
+
+            <h2>Images</h2>
+
+            <img src="mechanical.jpg" alt="Mechanical ventilation equipment inside a plant room" width="300">
+
+            <img src="electrical.jpg">
+            <img src="plumbing.jpg">
+        </section>
+    </main>
+
+    <footer>
+        <p>HTML final project by LIN KA WA</p>
+    </footer>
+
+<script>
+    const coursera_getParentTargetDomain = function() {
+      if (location.ancestorOrigins && location.ancestorOrigins[0]) {
+        return location.ancestorOrigins[0];
+      }
+      return "https://www.coursera.org";
+    };
+    </script>
+<script>
+    if (window.parent !== window) {
+      (function() {
+        var historyWrapper = function(functionType) {
+          var whichFunc = history[functionType];
+          return function() {
+            var response = whichFunc.apply(this, arguments);
+            var eventRes = new Event(functionType);
+            eventRes.arguments = arguments;
+            window.dispatchEvent(eventRes);
+            return response;
+          };
+        };
+        history.pushState = historyWrapper("pushState");
+        history.replaceState = historyWrapper("replaceState");
+        const sendInnerFrameUrl = function() {
+          window.parent.postMessage({'innerFrameUrl': window.location.href, 'fromInnerFrame': true}, coursera_getParentTargetDomain());
+        };
+        window.addEventListener("pushState",    sendInnerFrameUrl);
+        window.addEventListener("replaceState", sendInnerFrameUrl);
+        window.addEventListener("popstate",     sendInnerFrameUrl);
+        window.addEventListener("hashchange",   sendInnerFrameUrl);
+      })();
+    }
+    </script>
+<script>
+    if (window.parent !== window) {
+      window.parent.postMessage({'innerFrameUrl': window.location.href, 'fromInnerFrame': true}, coursera_getParentTargetDomain());
+    }
+    </script>
+<script>
+    if (window.parent !== window) {
+      (function() {
+        function throttle(callback, limit) {
+          var waiting = false;                      // Initially, we're not waiting
+          return function () {                      // We return a throttled function
+            if (!waiting) {                         // If we're not waiting
+              callback.apply(this, arguments);      // Execute users function
+              waiting = true;                       // Prevent future invocations
+              setTimeout(function () {              // After a period of time
+                  waiting = false;                  // And allow future invocations
+              }, limit);
+            }
+          }
+        }
+
+        const notify = (userActionType) => {
+          window.parent.postMessage({'isActive': true, 'fromInnerFrame': true, 'userActionType': userActionType}, coursera_getParentTargetDomain());
+        };
+
+        const throttledNotifyKeyPress = throttle(() => notify('key_press'), 10000);
+        const throttledNotifyMouseMovement = throttle(() => notify('mouse_movement'), 10000);
+        const throttledNotifyClick = throttle(() => notify('key_press'), 10000);
+
+        window.addEventListener('keydown', throttledNotifyKeyPress);
+        window.addEventListener('mousemove', throttledNotifyMouseMovement);
+        window.addEventListener('click', throttledNotifyClick);
+      })();
+    }
+    </script></body>
+
+</html>
